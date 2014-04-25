@@ -15,10 +15,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="css/main.css">
 
 		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
 		<script>
@@ -42,6 +44,59 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
+				<section>
+					<h1>TDD - the Tools</h1>
+					<p>
+						<small>Created by <a href="http://marisks.net">Māris Krivtežs</a></small>
+					</p>
+				</section>
+				<section>
+					<a href="https://github.com/xunit/xunit"><img src="/img/xunit-net-logo.png" alt="xUnit.net logo" class="clean-img"></a>	
+				</section>
+				<section>
+					<h2>Test runner for Visual Studio</h2>
+					<img src="/img/xunit-test-runner.png" alt="xUnit test runner installation for Visual Studio">
+				</section>
+				<section>
+					<h2>NuGet package</h2>
+					<img src="/img/xunit-nuget.png" alt="xUnit NuGet package installation">
+				</section>
+				<section>
+					<h2>Basics - Facts</h2>
+					<pre><code data-trim contenteditable>
+using Xunit;
+
+namespace Tests {
+    public class MathTests {
+        [Fact]
+        public void two_plus_two_is_four() {
+            Assert.Equal(4, 2 + 2);
+        }
+    }
+}
+						</code></pre>
+				</section>
+				<section>
+					<h2>Basics - Setup/Teardown</h2>
+					<pre><code data-trim contenteditable>
+public class SetupTeardownTests : IDisposable {
+    private int _resource;
+
+    public SetupTeardownTests() {
+        _resource = 5;
+    }
+
+    [Fact]
+    public void resource_is_initialized() {
+        Assert.Equal(_resource, 5);
+    }
+
+    public void Dispose() {
+        _resource = 0;
+    }
+}
+					</code></pre>
+				</section>
 				<section>
 					<h1>Reveal.js</h1>
 					<h3>HTML Presentations Made Easy</h3>
@@ -371,7 +426,8 @@ function linkify( selector ) {
 				center: true,
 
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+				backgroundTransition: 'slide',
 
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
