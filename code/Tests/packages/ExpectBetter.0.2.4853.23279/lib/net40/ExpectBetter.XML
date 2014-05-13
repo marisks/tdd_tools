@@ -1,0 +1,1194 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ExpectBetter</name>
+    </assembly>
+    <members>
+        <member name="T:ExpectBetter.AllowNullActualAttribute">
+            <summary>
+            Indicates that a value of <see langword="null"/> is acceptable for the
+            decorated matcher method.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Codegen.NullActualInterceptor`2">
+            <summary>
+            Implements checking for unexpected null actuals.
+            </summary>
+            <typeparam name="TActual"></typeparam>
+            <typeparam name="TMatcher"></typeparam>
+        </member>
+        <member name="T:ExpectBetter.Codegen.NullActualInterceptorBase">
+            <summary>
+            A convenience class for type testing at runtime.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Collections.CountingBag`1">
+            <summary>
+            Represents an unordered collection of elements in which duplicates
+            are allowed.  Suitable only for counting and equality-based membership
+            checking, as distinct element references are not maintained.
+            </summary>
+            <typeparam name="T">
+            The type of elemented stored.
+            </typeparam>
+        </member>
+        <member name="T:ExpectBetter.ExpectationException">
+            <summary>
+            Represents an unmet expectation.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.ExpectationException.#ctor(System.String)">
+            <summary>
+            Creates an instance of the <see cref="T:ExpectBetter.ExpectationException"/> class
+            with the given <paramref name="message"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.ExpectationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates an instance of the <see cref="T:ExpectBetter.ExpectationException"/> class
+            with the given <paramref name="message"/> and
+            <paramref name="innerException"/> object.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:ExpectBetter.Expectations">
+            <summary>
+            Exposes common configuration methods.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expectations.Wrap``2(``0)">
+            <summary>
+            Wraps a matcher in a proxy that checks assertion results, formats
+            error messages, and performs other housekeeping.
+            </summary>
+            <typeparam name="TActual">
+            The type of object tested by the wrapped matcher.
+            </typeparam>
+            <typeparam name="TMatcher">
+            The type of matcher to be wrapped.
+            </typeparam>
+            <param name="actual">
+            The actual value being tested.
+            </param>
+            <returns>
+            Returns a wrapped matcher that tests the <paramref name="actual"/>
+            value given.
+            </returns>
+        </member>
+        <member name="M:ExpectBetter.Extensions.Cycle``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Cycle the specified collection.
+            </summary>
+            <description>
+            Creates an infinite sequence of elements from a given collection, repeating
+            elements while preserving their order.
+            </description>
+            <remarks>
+            <para>
+            This method attempts to avoid repeated IEnumerable iterations;
+            when given an array or an IList&lt;T&gt;, a more efficient
+            generator is used.
+            Be aware that a bona-fide Enumerable may be enumerated any
+            numer of times.
+            </para>
+            </remarks>
+            <param name='collection'>
+            The collection to be cycled.
+            </param>
+            <typeparam name='T'>
+            The type of element contained in the collection.
+            </typeparam>
+        </member>
+        <member name="M:ExpectBetter.Extensions.Partition``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})">
+            <summary>
+            Partition the specified collection using the given predicate.
+            </summary>
+            <param name='collection'>
+            The collection to be partitioned.
+            </param>
+            <param name='predicate'>
+            The predicate with which to partition.
+            </param>
+            <typeparam name='T'>
+            The type of element contained in the given collection.
+            </typeparam>
+            <returns>
+            A tuple containing two enumerations, one containing elements for
+            which <paramref name="predicate"/> returned <see langword="true"/>,
+            the second containing elements for which it returned <see langword="false"/>.
+            </returns>			
+        </member>
+        <member name="M:ExpectBetter.Extensions.Interject``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Combines two collections such that the elements of the second are placed
+            between the elements of the first, preserving order.
+            </summary>
+            <remarks>
+            The second collection is cycled - if it is too short, its elements are repeated.
+            </remarks>
+            <param name='collection'>
+            The collection into which to interject elements.
+            </param>
+            <param name='interjection'>
+            The collection containing elements to interject.
+            </param>
+            <typeparam name='T'>
+            The type of element contained in the resulting collection.
+            </typeparam>
+        </member>
+        <member name="T:ExpectBetter.Expect">
+            <summary>
+            Provides matchers with which to state expectations.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.#ctor">
+            <summary>
+            Default constructor.  Present to prevent instantiation of this class.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Object)">
+            <summary>
+            Set expectations for an <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Char)">
+            <summary>
+            Set expectations for a <see cref="T:System.Char"/>;
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The``1(System.IEquatable{``0})">
+            <summary>
+            Set expectations for an <see cref="T:System.IEquatable`1"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The``1(System.Nullable{``0})">
+            <summary>
+            Set expectations for a <see cref="T:System.Nullable`1"/>
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.String)">
+            <summary>
+            Set expectations for a <see cref="T:System.String"/>
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The``1(System.IComparable{``0})">
+            <summary>
+            Set expectations for an <see cref="T:System.IComparable`1"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Set expectations for an <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+            Set expectations for an <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            Set expectations for an <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Boolean)">
+            <summary>
+            Set expectations for a <see cref="T:System.Boolean"/> value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Byte)">
+            <summary>
+            Set expectations for a <see cref="T:System.Byte"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.SByte)">
+            <summary>
+            Set expectations for a <see cref="T:System.SByte"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Int16)">
+            <summary>
+            Set expectations for an <see cref="T:System.Int16"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.UInt16)">
+            <summary>
+            Set expectations for a <see cref="T:System.UInt16"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Int32)">
+            <summary>
+            Set expectations for an <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.UInt32)">
+            <summary>
+            Set expectations for a <see cref="T:System.UInt32"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Int64)">
+            <summary>
+            Set expectations for an <see cref="T:System.Int64"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.UInt64)">
+            <summary>
+            Set expectations for a <see cref="T:System.UInt64"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Single)">
+            <summary>
+            Set expectations for a <see cref="T:System.Single"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Double)">
+            <summary>
+            Set expectations for a <see cref="T:System.Double"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Decimal)">
+            <summary>
+            Set expectations for a <see cref="T:System.Decimal"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.UIntPtr)">
+            <summary>
+            Set expectations for a <see cref="T:System.UIntPtr"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.IntPtr)">
+            <summary>
+            Set expectations for an <see cref="T:System.IntPtr"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.DateTime)">
+            <summary>
+            Set expectations for a <see cref="T:System.DateTime"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Action)">
+            <summary>
+            Set expectations for an <see cref="T:System.Action"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The``1(System.Func{``0})">
+            <summary>
+            Set expectations for a <see cref="T:System.Func`1"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Expect.The(System.Type)">
+            <summary>
+            Set expectations for a <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.BaseObjectMatcher`2">
+            <summary>
+            Exposes matcher methods on <see cref="T:System.Object"/>.  Not intended to be
+            exposed directly; use <see cref="T:ExpectBetter.Matchers.ObjectMatcher"/> instead.
+            </summary>
+            <typeparam name="TActual">
+            The type being tested.
+            </typeparam>
+            <typeparam name="TMatcher">
+            The type of the most-derived matcher.
+            </typeparam>
+        </member>
+        <member name="T:ExpectBetter.BaseMatcher`2">
+            <summary>
+            Represents the attributes common to all matchers.
+            </summary>
+            <typeparam name="TActual">The type of the value being tested.</typeparam>
+            <typeparam name="TMatcher">The actual type of the derived matcher.</typeparam>
+        </member>
+        <member name="F:ExpectBetter.BaseMatcher`2.Not">
+            <summary>
+            A matcher that negates all defined methods.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.BaseMatcher`2.Initialize">
+            <summary>
+            When overridden in a derived class, performs any pre-test setup
+            required.
+            </summary>
+        </member>
+        <member name="F:ExpectBetter.BaseMatcher`2.inverted">
+            <summary>
+            A value indicating whether this matcher should negate the results
+            of its test methods; in other words, whether it is the
+            <see cref="F:ExpectBetter.BaseMatcher`2.Not"/> value of another matcher.
+            </summary>
+        </member>
+        <member name="F:ExpectBetter.BaseMatcher`2.actual">
+            <summary>
+            The value being tested.
+            </summary>
+        </member>
+        <member name="F:ExpectBetter.BaseMatcher`2.actualDescription">
+            <summary>
+            When set, specifies a message describing the value being tested.
+            </summary>
+        </member>
+        <member name="F:ExpectBetter.BaseMatcher`2.expectedDescription">
+            <summary>
+            When set, specifies a message describing the expected value.
+            </summary>
+        </member>
+        <member name="F:ExpectBetter.BaseMatcher`2.failureMessage">
+            <summary>
+            When set, specifies a test's failure message.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseObjectMatcher`2.ToBeNull">
+            <summary>
+            Expect the value to be <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseObjectMatcher`2.ToBeTheSameAs(`0)">
+            <summary>
+            Expect the value to be the same instance as the given
+            value.
+            </summary>
+            <param name="expected">
+            The expected instance.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseObjectMatcher`2.ToEqual(`0)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+            <param name="expected">
+            The expected value.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseObjectMatcher`2.ToBeAnInstanceOf``1">
+            <summary>
+            Expect the value to be an instance of
+            <typeparamref name="TExpected"/>.
+            </summary>
+            <remarks>
+            This is true if an instance of <typeparamref name="TExpected"/> is
+            assignable from an instance of the runtime type of the value.
+            </remarks>
+            <typeparam name="TExpected">
+            The expected type of the value.
+            </typeparam>
+        </member>
+        <member name="T:ExpectBetter.Matchers.BoolMatcher">
+            <summary>
+            Exposes test methods for <see cref="T:System.Boolean"/> values.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BoolMatcher.ToBeTrue">
+            <summary>
+            Expect the boolean value to be <see langword="true"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BoolMatcher.ToBeFalse">
+            <summary>
+            Expect the boolean value to be <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BoolMatcher.ToEqual(System.Boolean)">
+            <summary>
+            Expect the boolean value to match the given value.
+            </summary>
+            <param name="expected">
+            The expected value.
+            </param>
+        </member>
+        <member name="T:ExpectBetter.Matchers.CharMatcher">
+            <summary>
+            Exposes test methods for <see cref="T:System.Char"/> values.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.CharMatcher.ToBeLowerCase">
+            <summary>
+            Expect the character to be lower case.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.CharMatcher.ToBeUpperCase">
+            <summary>
+            Expect the character to be upper case.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.CharMatcher.ToEqual(System.Char)">
+            <summary>
+            Expect the character to equal the given character.
+            </summary>
+            <param name="expected">
+            The expected value.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.CharMatcher.ToBeALetter">
+            <summary>
+            Expect the character to be a letter.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ExpectBetter.Matchers.EquatableMatcher`1">
+            <summary>
+            Provides assertions on objects implementing
+            <see cref="T:System.IEquatable`1"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.EquatableMatcher`1.ToEqual(`0)">
+            <summary>
+            Expect the actual value to be equal to the <paramref name="expected"/>
+            value.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.NullableMatcher`1">
+            <summary>
+            Exposes assertions on nullable types.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ExpectBetter.Matchers.NullableMatcher`1.ToBeNull">
+            <summary>
+            Expect the value to be <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.NullableMatcher`1.ToHaveAValue">
+            <summary>
+            Expect the value not to be <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.ObjectMatcher">
+            <summary>
+            Exposes test methods on all objects.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.StringMatcher">
+            <summary>
+            Exposes test methods on strings.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.StringMatcher.ToBeLongerThan(System.String)">
+            <summary>
+            Expect the string to be longer than a given string.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.StringMatcher.ToEqual(System.String,System.StringComparison)">
+            <summary>
+            Expect the string to equal a given value using the provided
+            comparison.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.StringMatcher.ToContain(System.String,System.StringComparison)">
+            <summary>
+            Expect the string to contain a given value using the provided
+            comparison.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.StringMatcher.ToBeNullOrEmpty">
+            <summary>
+            Expect the string to be null or empty.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.StringMatcher.ToBeNullOrWhitespace">
+            <summary>
+            Expect the string to be null, empty or whitespace.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.ComparableMatcher`1">
+            <summary>
+            Exposes test methods on objects implementing
+            <see cref="T:System.IComparable`1"/>.
+            </summary>
+            <typeparam name="T">
+            The type of object to which the object being tested can be compared.
+            </typeparam>
+        </member>
+        <member name="M:ExpectBetter.Matchers.ComparableMatcher`1.ToEqual(`0)">
+            <summary>
+            Expect the value to equal an expected value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.ComparableMatcher`1.ToBeLessThan(`0)">
+            <summary>
+            Expect the value to be less than a given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.ComparableMatcher`1.ToBeGreaterThan(`0)">
+            <summary>
+            Expect the value to be greater than a given value.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.ByteMatcher">
+            <summary>
+            Provides assertions on bytes.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.ByteMatcher.ToBeGreaterThan(System.Byte)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.ByteMatcher.ToBeLessThan(System.Byte)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.ByteMatcher.ToEqual(System.Byte)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.SByteMatcher">
+            <summary>
+            Provides assertions on signed bytes.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SByteMatcher.ToBeGreaterThan(System.SByte)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SByteMatcher.ToBeLessThan(System.SByte)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SByteMatcher.ToEqual(System.SByte)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SByteMatcher.ToBePositive">
+            <summary>
+            Expect the value to be positive, i.e greater than or equal to zero.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.Int16Matcher">
+            <summary>
+            Provides assertions on 16-bit integers.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int16Matcher.ToBeGreaterThan(System.Int16)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int16Matcher.ToBeLessThan(System.Int16)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int16Matcher.ToEqual(System.Int16)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int16Matcher.ToBePositive">
+            <summary>
+            Expect the value to be positive, i.e greater than or equal to zero.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.UInt16Matcher">
+            <summary>
+            Provides assertions on unsigned 16-bit integers.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UInt16Matcher.ToBeGreaterThan(System.UInt16)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UInt16Matcher.ToBeLessThan(System.UInt16)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UInt16Matcher.ToEqual(System.UInt16)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.Int32Matcher">
+            <summary>
+            Provides assertions on 32-bit integers.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int32Matcher.ToBeGreaterThan(System.Int32)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int32Matcher.ToBeLessThan(System.Int32)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int32Matcher.ToEqual(System.Int32)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int32Matcher.ToBePositive">
+            <summary>
+            Expect the value to be positive, i.e greater than or equal to zero.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.UInt32Matcher">
+            <summary>
+            Provides assertions on unsigned 32-bit integers.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UInt32Matcher.ToBeGreaterThan(System.UInt32)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UInt32Matcher.ToBeLessThan(System.UInt32)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UInt32Matcher.ToEqual(System.UInt32)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.Int64Matcher">
+            <summary>
+            Provides assertions on 64-bit integers.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int64Matcher.ToBeGreaterThan(System.Int64)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int64Matcher.ToBeLessThan(System.Int64)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int64Matcher.ToEqual(System.Int64)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.Int64Matcher.ToBePositive">
+            <summary>
+            Expect the value to be positive, i.e greater than or equal to zero.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.UInt64Matcher">
+            <summary>
+            Provides assertions on unsigned 64-bit integers.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UInt64Matcher.ToBeGreaterThan(System.UInt64)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UInt64Matcher.ToBeLessThan(System.UInt64)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UInt64Matcher.ToEqual(System.UInt64)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.SingleMatcher">
+            <summary>
+            Provides assertions on IEEE float values.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SingleMatcher.ToBeGreaterThan(System.Single)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SingleMatcher.ToBeLessThan(System.Single)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SingleMatcher.ToEqual(System.Single)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SingleMatcher.ToBePositive">
+            <summary>
+            Expect the value to be positive, i.e greater than or equal to zero.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SingleMatcher.ToBeWithinDeltaOf(System.Single,System.Single)">
+            <summary>
+            Expect the value to be within a range defined by an
+            <paramref name="expected"/> value plus or minus a
+            <paramref name="delta"/> value.
+            </summary>
+            <param name="expected">
+            The center of the range in which the value is expected to be.
+            </param>
+            <param name="delta">
+            A value defining the size of the range in either direction.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SingleMatcher.ToBeInfinity">
+            <summary>
+            Expect the value to be a representation of infinity.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SingleMatcher.ToBePositiveInfinity">
+            <summary>
+            Expect the value to be a representation of positive infinity.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SingleMatcher.ToBeNegativeInfinity">
+            <summary>
+            Expect the value to be a representation of negative infinity.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.SingleMatcher.ToBeNaN">
+            <summary>
+            Expect the value to be the IEEE not-a-number value.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.DoubleMatcher">
+            <summary>
+            Provides assertions on IEEE double values.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DoubleMatcher.ToBeGreaterThan(System.Double)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DoubleMatcher.ToBeLessThan(System.Double)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DoubleMatcher.ToEqual(System.Double)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DoubleMatcher.ToBePositive">
+            <summary>
+            Expect the value to be positive, i.e greater than or equal to zero.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DoubleMatcher.ToBeWithinDeltaOf(System.Double,System.Double)">
+            <summary>
+            Expect the value to be within a range defined by an
+            <paramref name="expected"/> value plus or minus a
+            <paramref name="delta"/> value.
+            </summary>
+            <param name="expected">
+            The center of the range in which the value is expected to be.
+            </param>
+            <param name="delta">
+            A value defining the size of the range in either direction.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DoubleMatcher.ToBeInfinity">
+            <summary>
+            Expect the value to be a representation of infinity.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DoubleMatcher.ToBePositiveInfinity">
+            <summary>
+            Expect the value to be a representation of positive infinity.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DoubleMatcher.ToBeNegativeInfinity">
+            <summary>
+            Expect the value to be a representation of negative infinity.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DoubleMatcher.ToBeNaN">
+            <summary>
+            Expect the value to be the IEEE not-a-number value.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.DecimalMatcher">
+            <summary>
+            Provides assertions on <see cref="T:System.Decimal"/> values.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DecimalMatcher.ToBeGreaterThan(System.Decimal)">
+            <summary>
+            Expect the value to be greater than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DecimalMatcher.ToBeLessThan(System.Decimal)">
+            <summary>
+            Expect the value to be less than the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DecimalMatcher.ToEqual(System.Decimal)">
+            <summary>
+            Expect the value to equal the given value.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DecimalMatcher.ToBePositive">
+            <summary>
+            Expect the value to be positive, i.e greater than or equal to zero.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.IntPtrMatcher">
+            <summary>
+            Provides assertions on <see cref="T:System.IntPtr"/> values.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.IntPtrMatcher.ToBeZero">
+            <summary>
+            Expect the pointer value to be zero.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.UIntPtrMatcher">
+            <summary>
+            Provides assertions on <see cref="T:System.UIntPtr"/> values.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.UIntPtrMatcher.ToBeZero">
+            <summary>
+            Expect the pointer value to be zero.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.DictionaryMatcher`2">
+            <summary>
+            Exposes test methods on objects implementing
+            <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+            <typeparam name="TKey">The type of the dictionary's keys.</typeparam>
+            <typeparam name="TValue">The type of the dictionary's values.</typeparam>
+        </member>
+        <member name="T:ExpectBetter.BaseCollectionMatcher`3">
+            <summary>
+            Exposes matcher methods on <see cref="T:System.Collections.Generic.ICollection`1"/>
+            objects.  Not intended to be exposed directly; use
+            <see cref="T:ExpectBetter.Matchers.CollectionMatcher`1"/> instead.
+            </summary>
+            <typeparam name="TCollection">
+            A type implementing <see cref="T:System.Collections.Generic.ICollection`1"/>
+            </typeparam>
+            <typeparam name="TItem">
+            The type of item contained in <typeparamref name="TCollection"/>.
+            </typeparam>
+            <typeparam name="TMatcher">
+            The type of the most-derived matcher.
+            </typeparam>
+        </member>
+        <member name="T:ExpectBetter.Matchers.BaseEnumerableMatcher`3">
+            <summary>
+            Exposes matcher methods on <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            objects.  Not intended to be exposed directly; use
+            <see cref="T:ExpectBetter.Matchers.EnumerableMatcher`1"/> instead.
+            </summary>
+            <typeparam name="TEnumerable">
+            The test type, implementing <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </typeparam>
+            <typeparam name="TItem">
+            The type of element contained in <typeparamref name="TEnumerable"/>.
+            </typeparam>
+            <typeparam name="TMatcher">
+            The type of the most-derived matcher.
+            </typeparam>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.ToBeEmpty">
+            <summary>
+            Expect the enumerable to contain no elements.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.ToContain(`1)">
+            <summary>
+            Expect the enumerable to contain the given item.
+            </summary>
+            <remarks>
+            Uses the default equality comparer for <typeparamref name="TItem"/>.
+            </remarks>
+            <param name="expected">
+            The expected item.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.ToContain(`1,System.Collections.Generic.IEqualityComparer{`1})">
+            <summary>
+            Expect the enumerable to contain the given item, using a provided
+            equality comparer.
+            </summary>
+            <param name="expected">
+            The expected item.
+            </param>
+            <param name="comparer">
+            The equality comparer to use in testing for item membership.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.ToContainInOrder(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            Expect the enumerable to contain a number of items in the given
+            ordering.  Other items in between are acceptable.
+            </summary>
+            <remarks>
+            Uses the default equality comparer for <typeparamref name="TItem"/>.
+            </remarks>
+            <param name="expected">
+            The items expected to be present.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.ToContainInOrder(`1[])">
+            <summary>
+            Expect the enumerable to contain a number of items in the given
+            ordering.  Other items in between are acceptable.
+            </summary>
+            <remarks>
+            Uses the default equality comparer for <typeparamref name="TItem"/>.
+            </remarks>
+            <param name="expected">
+            The items expected to be present.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.ToContainInOrder(System.Collections.Generic.IEnumerable{`1},System.Collections.Generic.IEqualityComparer{`1})">
+            <summary>
+            Expect the enumerable to contain a number of items in the given
+            ordering, using the given equality comparer.  Other items in
+            between are acceptable.
+            </summary>
+            <param name="expected">
+            The items expected to be present.
+            </param>
+            <param name="comparer">
+            The equality comparer to use in testing for item membership.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.ToContainExactly(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            Expect the enumerable to contain only the given items.
+            </summary>
+            <param name="expected">
+            The expected items.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.ToContainExactly(`1[])">
+            <summary>
+            Expect the enumerable to contain only the given items.
+            </summary>
+            <param name="expected">
+            The expected items.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.ToContainExactly(System.Collections.Generic.IEnumerable{`1},System.Collections.Generic.IEqualityComparer{`1})">
+            <summary>
+            Expect the enumerable to contain only the given items, using the
+            given equality comparer.
+            </summary>
+            <param name="expected">
+            The expected items.
+            </param>
+            <param name="comparer">
+            The comparer used to determine item membership.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.BaseEnumerableMatcher`3.EnumerateTwo(System.Collections.Generic.IEnumerable{`1},System.Collections.Generic.IEnumerable{`1},ExpectBetter.Matchers.BaseEnumerableMatcher{`0,`1,`2}.DualEnumeratorPredicate)">
+            <summary>
+            Applies a predicate to two enumerables and returns the result.
+            </summary>
+            <param name="actual"></param>
+            <param name="expected"></param>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ExpectBetter.BaseCollectionMatcher`3.ToNumber(System.Int32)">
+            <summary>
+            Expect the collection to have a given number of elements.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.BaseCollectionMatcher`3.ToNumberAtLeast(System.Int32)">
+            <summary>
+            Expect the collection to have at minimum a given number of elements.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.BaseCollectionMatcher`3.ToBeEmpty">
+            <summary>
+            Expect the collection to have no elements.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ExpectBetter.BaseCollectionMatcher`3.ToContain(`1)">
+            <summary>
+            Expect the collection to have a given item.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DictionaryMatcher`2.ToContainKey(`0)">
+            <summary>
+            Expect the dictionary to contain a given key.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DictionaryMatcher`2.ToContainKeyValuePair(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Expect the dictionary to contain a given key-value pair.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DictionaryMatcher`2.ToContainKeyAndValue(`0,`1)">
+            <summary>
+            Expect the dictionary to contain a given key and value.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.CollectionMatcher`1">
+            <summary>
+            Exposes test methods on values implementing
+            <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <typeparam name="T">
+            The type of element contained in the collection being tested.
+            </typeparam>
+        </member>
+        <member name="T:ExpectBetter.Matchers.FunctionMatcher`1">
+            <summary>
+            Exposes test methods on delegates of type <see cref="T:System.Func`1"/>.
+            </summary>
+            <typeparam name="T">
+            The result type of the function being tested.
+            </typeparam>
+        </member>
+        <member name="M:ExpectBetter.Matchers.FunctionMatcher`1.ToThrow``1">
+            <summary>
+            Expect the function to throw an exception deriving from
+            <typeparamref name="TException"/>.
+            </summary>
+            <typeparam name="TException">
+            The type of the exception expected.
+            </typeparam>
+            <returns>
+            Returns <see langword="true"/> if the expected exception is thrown,
+            and <see langword="false"/> otherwise.
+            </returns>
+        </member>
+        <member name="M:ExpectBetter.Matchers.FunctionMatcher`1.ToReturn(System.IEquatable{`0})">
+            <summary>
+            Expect the function to return a value considered equal to the given
+            <see cref="T:System.IEquatable`1"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.FunctionMatcher`1.ToReturn(`0,System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Expect the function to return a value considered equal to the
+            <paramref name="expected"/> value by the given <paramref name="comparer"/>.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.ActionMatcher">
+            <summary>
+            Exposes test methods on delegates of type <see cref="T:System.Action"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.ActionMatcher.ToThrow``1">
+            <summary>
+            Expect the function to throw an exception deriving from
+            <typeparamref name="TException"/>.
+            </summary>
+            <typeparam name="TException">
+            The type of the exception expected.
+            </typeparam>
+            <returns>
+            Returns <see langword="true"/> if the expected exception is thrown,
+            and <see langword="false"/> otherwise.
+            </returns>
+        </member>
+        <member name="T:ExpectBetter.Matchers.EnumerableMatcher`1">
+            <summary>
+            Exposes test methods on objects implementing
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+            <typeparam name="T">
+            The type of element contained in the enumerable being tested.
+            </typeparam>
+        </member>
+        <member name="T:ExpectBetter.Matchers.DateTimeMatcher">
+            <summary>
+            Exposes test methods on <see cref="T:System.DateTime"/> values.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DateTimeMatcher.ToBeEarlierThan(System.DateTime)">
+            <summary>
+            Expect the date to fall before the given date.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DateTimeMatcher.ToBeLaterThan(System.DateTime)">
+            <summary>
+            Expect the date to come after the given date.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DateTimeMatcher.ToHaveKind(System.DateTimeKind)">
+            <summary>
+            Expect the date to be of a given <see cref="T:System.DateTimeKind"/>.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DateTimeMatcher.ToBeDaylightSavingsTime">
+            <summary>
+            Expect the date to fall within daylight savings time.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DateTimeMatcher.ToBeUtc">
+            <summary>
+            Expect the date to be in UTC.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DateTimeMatcher.ToBeOnA(System.DayOfWeek)">
+            <summary>
+            Expect the date to fall on a given day of the week.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DateTimeMatcher.ToBeInTheMonthOf(System.Int32)">
+            <summary>
+            Expect the date to fall within a given month.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.DateTimeMatcher.ToEqual(System.DateTime)">
+            <summary>
+            Expect the date to exactly equal a given date.
+            </summary>
+        </member>
+        <member name="T:ExpectBetter.Matchers.TypeMatcher">
+            <summary>
+            Exposes expectations on <see cref="T:System.Type"/> objects.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.TypeMatcher.Initialize">
+            <summary>
+            Sets a custom description of the actual type being tested.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.TypeMatcher.ToInheritFrom``1">
+            <summary>
+            Expect the actual type to derive from
+            <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">
+            The class or interface type expected to be implemented or inherited
+            by the actual.
+            </typeparam>
+        </member>
+        <member name="M:ExpectBetter.Matchers.TypeMatcher.ToInheritFrom(System.Type)">
+            <summary>
+            Expect the actual type to derive from the
+            <paramref name="expected"/> type.
+            </summary>
+            <param name="expected">
+            The class or interface type expected to be implemented or inherited
+            by the actual.
+            </param>
+        </member>
+        <member name="M:ExpectBetter.Matchers.TypeMatcher.ToBeGeneric">
+            <summary>
+            Expect the type to be generic.
+            </summary>
+        </member>
+        <member name="M:ExpectBetter.Matchers.TypeMatcher.ToBeAGenericTypeDefinition">
+            <summary>
+            Expect the type to be open, i.e. to be generic without containing
+            generic parameters.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

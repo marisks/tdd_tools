@@ -1,8 +1,10 @@
 ﻿using System;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Tests
 {
+    [Trait("Math", "adding")]
     public class MathTests
     {
         [Fact]
@@ -30,6 +32,18 @@ namespace Tests
         public void Dispose()
         {
             _resource = 0;
+        }
+    }
+
+    public class Theories
+    {
+        [Theory]
+        [InlineData(2, 2, 4)]
+        [InlineData(1, 3, 4)]
+        [InlineData(3, 5, 8)]
+        public void a_plus_b_has_correct_result(int a, int b, int expected)
+        {
+            Assert.Equal(expected, a + b);
         }
     }
 }

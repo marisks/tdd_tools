@@ -3,3 +3,11 @@
   box-shadow: none;
   background: none;
 }
+
+.reveal ul.clean {
+  list-style-type: none;
+}
+
+.reveal .site-url {
+  margin-bottom: 20px;
+}
